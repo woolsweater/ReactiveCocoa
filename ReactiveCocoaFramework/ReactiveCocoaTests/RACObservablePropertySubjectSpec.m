@@ -182,13 +182,25 @@ describe(@"RACObservablePropertySubject bindings", ^{
 		expect(a.strongTestObjectValue.stringValue).to.equal(testName1);
 		expect(a.strongTestObjectValue).notTo.equal(b.strongTestObjectValue);
 	});
+
+	it(@"should update primitive properties identified by keypaths when the intermediate values change", ^{
+		RACBind(a, strongTestObjectValue.integerValue) = RACBind(b, strongTestObjectValue.integerValue);
+
+		a.strongTestObjectValue = [[RACTestObject alloc] init];
+		b.strongTestObjectValue = [[RACTestObject alloc] init];
+		c.integerValue = 42;
+		b.strongTestObjectValue = c;
+		
+		expect(a.strongTestObjectValue.integerValue).to.equal(42);
+		expect(a.strongTestObjectValue).notTo.equal(b.strongTestObjectValue);
+	});
 	
 	it(@"should update properties identified by keypaths when the binding was created when one of the two objects had an intermediate nil value", ^{
 		RACBind(a, strongTestObjectValue.stringValue) = RACBind(b, strongTestObjectValue.stringValue);
 		b.strongTestObjectValue = [[RACTestObject alloc] init];
 		c.stringValue = testName1;
 		a.strongTestObjectValue = c;
-		
+
 		expect(a.strongTestObjectValue.stringValue).to.equal(testName1);
 		expect(b.strongTestObjectValue.stringValue).to.equal(testName1);
 		expect(a.strongTestObjectValue).notTo.equal(b.strongTestObjectValue);
@@ -263,8 +275,10 @@ describe(@"RACObservablePropertySubject bindings", ^{
 	
 	it(@"should handle deallocation of intermediate objects correctly even without support from KVO", ^{
 		__block BOOL wasDisposed = NO;
+
 		RACBind(a, weakTestObjectValue.stringValue) = RACBind(b, strongTestObjectValue.stringValue);
 		b.strongTestObjectValue = [[RACTestObject alloc] init];
+
 		@autoreleasepool {
 			RACTestObject *object = [[RACTestObject alloc] init];
 			[object.rac_deallocDisposable addDisposable:[RACDisposable disposableWithBlock:^{
@@ -275,12 +289,34 @@ describe(@"RACObservablePropertySubject bindings", ^{
 			object.stringValue = testName1;
 			
 			expect(wasDisposed).to.beFalsy();
-			
 			expect(b.strongTestObjectValue.stringValue).to.equal(testName1);
 		}
 		
 		expect(wasDisposed).will.beTruthy();
 		expect(b.strongTestObjectValue.stringValue).to.beNil();
+	});
+
+	it(@"should leave primitive properties alone when the intermediate objects deallocate", ^{
+		__block BOOL wasDisposed = NO;
+
+		RACBind(a, weakTestObjectValue.integerValue) = RACBind(b, strongTestObjectValue.integerValue);
+		b.strongTestObjectValue = [[RACTestObject alloc] init];
+
+		@autoreleasepool {
+			RACTestObject *object = [[RACTestObject alloc] init];
+			[object.rac_deallocDisposable addDisposable:[RACDisposable disposableWithBlock:^{
+				wasDisposed = YES;
+			}]];
+
+			a.weakTestObjectValue = object;
+			object.integerValue = 42;
+
+			expect(wasDisposed).to.beFalsy();
+			expect(b.strongTestObjectValue.integerValue).to.equal(42);
+		}
+		
+		expect(wasDisposed).will.beTruthy();
+		expect(b.strongTestObjectValue.integerValue).to.equal(42);
 	});
 	
 	it(@"should stop binding when disposed", ^{
