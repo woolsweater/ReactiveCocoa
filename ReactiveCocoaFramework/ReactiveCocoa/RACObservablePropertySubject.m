@@ -122,7 +122,12 @@
 
 	property->_exposedSubscriber = [RACSubscriber subscriberWithNext:^(id x) {
 		@strongify(property);
-		[property.target setValue:x forKeyPath:property.keyPath];
+
+		@try {
+			[property.target setValue:x forKeyPath:property.keyPath];
+		} @catch (NSException *ex) {
+			if (![ex.name isEqual:NSInvalidArgumentException]) @throw ex;
+		}
 	} error:^(NSError *error) {
 		@strongify(property);
 		NSCAssert(NO, @"Received error in RACObservablePropertySubject for key path \"%@\" on %@: %@", property.keyPath, property.target, error);
@@ -282,7 +287,12 @@
 		// Set the ignoreNextUpdate flag before setting the value so this binding
 		// ignores the value in the subsequent -didChangeValueForKey: callback.
 		ignoreNextUpdate = YES;
-		[object setValue:x forKey:lastKeyPathComponent];
+
+		@try {
+			[object setValue:x forKey:lastKeyPathComponent];
+		} @catch (NSException *ex) {
+			if (![ex.name isEqual:NSInvalidArgumentException]) @throw ex;
+		}
 	} error:^(NSError *error) {
 		@strongify(binding);
 		NSCAssert(NO, @"Received error in -[RACObservablePropertySubject binding] for key path \"%@\" on %@: %@", binding.keyPath, binding.target, error);
