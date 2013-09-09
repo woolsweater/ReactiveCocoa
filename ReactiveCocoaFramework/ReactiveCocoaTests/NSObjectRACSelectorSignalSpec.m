@@ -134,6 +134,7 @@ describe(@"RACTestObject", ^{
 		expect(key).to.equal(@"Winner");
 	});
 
+#if 0
 	it(@"should send arguments for invocation and invoke the original method on previously KVO'd receiver", ^{
 		RACTestObject *object = [[RACTestObject alloc] init];
 
@@ -177,6 +178,7 @@ describe(@"RACTestObject", ^{
 		expect(value).to.equal(@YES);
 		expect(key).to.equal(@"Winner");
 	});
+#endif
 
 	it(@"should send non-object arguments", ^{
 		RACTestObject *object = [[RACTestObject alloc] init];
@@ -259,6 +261,7 @@ it(@"should swizzle an NSObject method", ^{
 	expect(value).to.equal([RACTuple tupleWithObjectsFromArray:@[]]);
 });
 
+#if 0
 it(@"should work on a class that already overrides -forwardInvocation:", ^{
 	RACSubclassObject *object = [[RACSubclassObject alloc] init];
 
@@ -431,5 +434,6 @@ describe(@"-rac_signalForSelector:fromProtocol", ^{
 		expect(value).to.equal([RACTuple tupleWithObjectsFromArray:@[]]);
 	});
 });
+#endif
 
 SpecEnd
