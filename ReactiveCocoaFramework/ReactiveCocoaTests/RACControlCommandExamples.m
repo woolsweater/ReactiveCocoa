@@ -24,6 +24,8 @@ NSString * const RACControlCommandExampleActivateBlock = @"RACControlCommandExam
 
 - (BOOL)isEnabled;
 
+- (void)setRac_secondaryEnabled:(RACSignal *)secondSignal;
+
 @end
 
 SharedExampleGroupsBegin(RACControlCommandExamples)
@@ -55,6 +57,29 @@ sharedExamplesFor(RACControlCommandExamples, ^(NSDictionary *data) {
 		
 		[enabledSubject sendNext:@YES];
 		expect([control isEnabled]).will.beTruthy();
+	});
+	
+	it(@"should accept a second signal for binding to enabledness", ^{
+		expect([control isEnabled]).will.beTruthy();
+		
+		RACSubject * secondaryEnabledSubject = [RACSubject subject];
+		[control setRac_secondaryEnabled:secondaryEnabledSubject];
+		
+		[enabledSubject sendNext:@YES];
+		[secondaryEnabledSubject sendNext:@YES];
+		expect([control isEnabled]).will.beTruthy();
+		
+		[enabledSubject sendNext:@YES];
+		[secondaryEnabledSubject sendNext:@NO];
+		expect([control isEnabled]).will.beFalsy();
+		
+		[enabledSubject sendNext:@NO];
+		[secondaryEnabledSubject sendNext:@YES];
+		expect([control isEnabled]).will.beFalsy();
+		
+		[enabledSubject sendNext:@NO];
+		[secondaryEnabledSubject sendNext:@NO];
+		expect([control isEnabled]).will.beFalsy();
 	});
 
 	it(@"should execute the control's command when activated", ^{
