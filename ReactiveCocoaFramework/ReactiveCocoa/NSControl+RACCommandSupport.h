@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class RACCommand;
+@class RACCommand, RACSignal;
 
 @interface NSControl (RACCommandSupport)
 
@@ -18,5 +18,10 @@
 ///
 /// Note: this will reset the control's target and action.
 @property (nonatomic, strong) RACCommand *rac_command;
+
+/// A secondary signal whose logical AND with the control's
+/// `command.enabled` will determine the control's own `enabled`.
+/// The secondary signal must consist of `NSNumber`s wrapping `BOOL`s.
+@property (nonatomic, strong) RACSignal * rac_secondaryEnabled;
 
 @end

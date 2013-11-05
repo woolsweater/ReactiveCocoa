@@ -16,6 +16,7 @@
 
 static void *NSControlRACCommandKey = &NSControlRACCommandKey;
 static void *NSControlEnabledDisposableKey = &NSControlEnabledDisposableKey;
+static void *NSControlSecondaryEnabledSignalKey = &NSControlSecondaryEnabledSignalKey;
 
 @implementation NSControl (RACCommandSupport)
 
@@ -40,6 +41,25 @@ static void *NSControlEnabledDisposableKey = &NSControlEnabledDisposableKey;
 
 	RACScopedDisposable *disposable = [[command.enabled setKeyPath:@"enabled" onObject:self] asScopedDisposable];
 	objc_setAssociatedObject(self, NSControlEnabledDisposableKey, disposable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (RACSignal *)rac_secondaryEnabled {
+	return objc_getAssociatedObject(self, NSControlSecondaryEnabledSignalKey);
+}
+
+
+- (void)setRac_secondaryEnabled:(RACSignal *)secondSignal {
+	// Tear down any previous binding before setting up our new one, or else we
+	// might get assertion failures.
+	[objc_getAssociatedObject(self, NSControlEnabledDisposableKey) dispose];
+	objc_setAssociatedObject(self, NSControlEnabledDisposableKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+	
+	RACCommand * command = objc_getAssociatedObject(self, NSControlRACCommandKey);
+	RACSignal * andEnabled = [[RACSignal combineLatest:@[secondSignal, command.enabled]] and];
+	
+	RACScopedDisposable *disposable = [[andEnabled setKeyPath:@"enabled" onObject:self] asScopedDisposable];
+	objc_setAssociatedObject(self, NSControlEnabledDisposableKey, disposable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+	objc_setAssociatedObject(self, NSControlSecondaryEnabledSignalKey, secondSignal, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)rac_hijackActionAndTargetIfNeeded {
