@@ -10,6 +10,11 @@
 
 @class RACSignal;
 
+/// A transformation from an input value to a signal.
+///
+/// This matches the type of -[RACSignalGenerator signalWithValue:].
+typedef RACSignal * (^RACSignalGeneratorBlock)(id input);
+
 /// An abstract class representing the logic for creating a signal from one
 /// input value.
 ///
@@ -29,7 +34,7 @@
 ///
 /// Returns an instance of a private RACSignalGenerator subclass (regardless of
 /// which class this method is invoked upon).
-+ (RACSignalGenerator *)generatorWithBlock:(RACSignal * (^)(id input))block;
++ (RACSignalGenerator *)generatorWithBlock:(RACSignalGeneratorBlock)block;
 
 /// Creates a signal for the given value.
 ///

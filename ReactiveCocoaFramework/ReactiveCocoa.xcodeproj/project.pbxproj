@@ -504,6 +504,12 @@
 		D0BD34D6182B163E00B324CB /* RACDynamicSignalGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BD34D2182B163E00B324CB /* RACDynamicSignalGenerator.m */; };
 		D0BD34D7182B163E00B324CB /* RACDynamicSignalGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BD34D2182B163E00B324CB /* RACDynamicSignalGenerator.m */; };
 		D0BD34D8182B163E00B324CB /* RACDynamicSignalGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BD34D2182B163E00B324CB /* RACDynamicSignalGenerator.m */; };
+		D0BD34DB182B1BF600B324CB /* RACRepeatingSignalGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = D0BD34D9182B1BF600B324CB /* RACRepeatingSignalGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0BD34DC182B1BF600B324CB /* RACRepeatingSignalGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = D0BD34D9182B1BF600B324CB /* RACRepeatingSignalGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0BD34DD182B1BF600B324CB /* RACRepeatingSignalGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = D0BD34D9182B1BF600B324CB /* RACRepeatingSignalGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0BD34DE182B1BF600B324CB /* RACRepeatingSignalGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BD34DA182B1BF600B324CB /* RACRepeatingSignalGenerator.m */; };
+		D0BD34DF182B1BF600B324CB /* RACRepeatingSignalGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BD34DA182B1BF600B324CB /* RACRepeatingSignalGenerator.m */; };
+		D0BD34E0182B1BF600B324CB /* RACRepeatingSignalGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BD34DA182B1BF600B324CB /* RACRepeatingSignalGenerator.m */; };
 		D0C55CE217759559008CDDCA /* RACDelegateProxySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C55CE117759559008CDDCA /* RACDelegateProxySpec.m */; };
 		D0C70EC616659333005AAD03 /* RACSubscriberExamples.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C70EC516659333005AAD03 /* RACSubscriberExamples.m */; };
 		D0C70EC8166595AD005AAD03 /* RACSubscriberSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C70EC7166595AD005AAD03 /* RACSubscriberSpec.m */; };
@@ -973,6 +979,8 @@
 		D0BD34C4182B159500B324CB /* RACSignalGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACSignalGenerator.m; sourceTree = "<group>"; };
 		D0BD34D1182B163E00B324CB /* RACDynamicSignalGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACDynamicSignalGenerator.h; sourceTree = "<group>"; };
 		D0BD34D2182B163E00B324CB /* RACDynamicSignalGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACDynamicSignalGenerator.m; sourceTree = "<group>"; };
+		D0BD34D9182B1BF600B324CB /* RACRepeatingSignalGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACRepeatingSignalGenerator.h; sourceTree = "<group>"; };
+		D0BD34DA182B1BF600B324CB /* RACRepeatingSignalGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACRepeatingSignalGenerator.m; sourceTree = "<group>"; };
 		D0C55CD817758A73008CDDCA /* UITextFieldRACSupportSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextFieldRACSupportSpec.m; sourceTree = "<group>"; };
 		D0C55CDE17758C2A008CDDCA /* UITextViewRACSupportSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextViewRACSupportSpec.m; sourceTree = "<group>"; };
 		D0C55CE117759559008CDDCA /* RACDelegateProxySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACDelegateProxySpec.m; sourceTree = "<group>"; };
@@ -1739,6 +1747,8 @@
 			children = (
 				D0BD34C3182B159500B324CB /* RACSignalGenerator.h */,
 				D0BD34C4182B159500B324CB /* RACSignalGenerator.m */,
+				D0BD34D9182B1BF600B324CB /* RACRepeatingSignalGenerator.h */,
+				D0BD34DA182B1BF600B324CB /* RACRepeatingSignalGenerator.m */,
 				D0BD34D0182B162D00B324CB /* Private */,
 			);
 			name = "Signal Generators";
@@ -1857,6 +1867,7 @@
 				D0E967771641EF9C00FCFF06 /* NSSet+RACSupport.h in Headers */,
 				D07EBA4518229196009EA5CC /* RACAction.h in Headers */,
 				D0E9678B1641EF9C00FCFF06 /* RACSequence.h in Headers */,
+				D0BD34DB182B1BF600B324CB /* RACRepeatingSignalGenerator.h in Headers */,
 				88A0B6D3165B2B77005DE8F3 /* RACSubscriptingAssignmentTrampoline.h in Headers */,
 				D0E3632D1811305B007C985A /* RACPromise.h in Headers */,
 				D0D487011642550100DD7605 /* RACStream.h in Headers */,
@@ -1912,6 +1923,7 @@
 				D08FF274169A331A00743C6D /* RACDisposable.h in Headers */,
 				D08FF275169A331A00743C6D /* RACScopedDisposable.h in Headers */,
 				D07EBA4618229196009EA5CC /* RACAction.h in Headers */,
+				D0BD34DC182B1BF600B324CB /* RACRepeatingSignalGenerator.h in Headers */,
 				D08FF276169A331A00743C6D /* RACCompoundDisposable.h in Headers */,
 				D08FF277169A331B00743C6D /* RACCommand.h in Headers */,
 				D08FF278169A331B00743C6D /* RACSequence.h in Headers */,
@@ -1972,6 +1984,7 @@
 				D013A3E01807B7450072B6CE /* RACEmptySignal.h in Headers */,
 				D05AD3E417F2DB230080895B /* RACScopedDisposable.h in Headers */,
 				D05AD40F17F2DB6A0080895B /* NSFileHandle+RACSupport.h in Headers */,
+				D0BD34DD182B1BF600B324CB /* RACRepeatingSignalGenerator.h in Headers */,
 				D05AD40517F2DB5D0080895B /* RACTestScheduler.h in Headers */,
 				D05AD42817F2DB840080895B /* RACKVOChannel.h in Headers */,
 				D05AD3FF17F2DB5D0080895B /* RACTargetQueueScheduler.h in Headers */,
@@ -2501,6 +2514,7 @@
 				55C39DE517F1EC6E006DC60C /* NSFileHandle+RACSupport.m in Sources */,
 				D0E363301811305B007C985A /* RACPromise.m in Sources */,
 				D0BD34D6182B163E00B324CB /* RACDynamicSignalGenerator.m in Sources */,
+				D0BD34DE182B1BF600B324CB /* RACRepeatingSignalGenerator.m in Sources */,
 				55C39DE617F1EC6E006DC60C /* NSNotificationCenter+RACSupport.m in Sources */,
 				D013A3F21807B9690072B6CE /* RACDynamicSignal.m in Sources */,
 				55C39DE717F1EC6E006DC60C /* NSString+RACSupport.m in Sources */,
@@ -2622,6 +2636,7 @@
 				5F9743FA1694A2460024EB82 /* RACEagerSequence.m in Sources */,
 				5F773DED169B46670023069D /* NSEnumerator+RACSupport.m in Sources */,
 				D077A170169B740200057BB1 /* RACEvent.m in Sources */,
+				D0BD34DF182B1BF600B324CB /* RACRepeatingSignalGenerator.m in Sources */,
 				8837EA1916A5A33300FC3CDF /* RACKVOTrampoline.m in Sources */,
 				6E58405D16F22F7800F588A6 /* NSObject+RACDeallocating.m in Sources */,
 				D07EBA4818229196009EA5CC /* RACAction.m in Sources */,
@@ -2728,6 +2743,7 @@
 				D05AD3C117F2DB100080895B /* RACPassthroughSubscriber.m in Sources */,
 				D0E363321811305B007C985A /* RACPromise.m in Sources */,
 				D0BD34D8182B163E00B324CB /* RACDynamicSignalGenerator.m in Sources */,
+				D0BD34E0182B1BF600B324CB /* RACRepeatingSignalGenerator.m in Sources */,
 				D05AD3C617F2DB100080895B /* RACTuple.m in Sources */,
 				D013A3F41807B9690072B6CE /* RACDynamicSignal.m in Sources */,
 				D049804217F91F42001EE042 /* EXTRuntimeExtensions.m in Sources */,
