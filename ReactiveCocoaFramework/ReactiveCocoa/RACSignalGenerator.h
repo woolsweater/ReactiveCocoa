@@ -26,6 +26,9 @@
 ///
 /// block - Describes how to create a signal from an input value, which may be
 ///         nil. This block must not be nil, and must not return a nil signal.
+///
+/// Returns an instance of a private RACSignalGenerator subclass (regardless of
+/// which class this method is invoked upon).
 + (RACSignalGenerator *)generatorWithBlock:(RACSignal * (^)(id input))block;
 
 /// Creates a signal for the given value.
