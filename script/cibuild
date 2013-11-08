@@ -3,6 +3,8 @@
 cd "$(dirname "$0")/../ReactiveCocoaFramework"
 SCRIPT_DIR=../script
 
+set -x
+
 ##
 ## Configuration Variables
 ##
