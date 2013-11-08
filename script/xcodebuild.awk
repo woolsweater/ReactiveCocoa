@@ -14,7 +14,7 @@ BEGIN {
     fflush(stdout);
 }
 
-/[0-9]+: (error|warning):/ {
+/([0-9]+: )?(error|warning):/ {
     errors = errors $0 "\n";
 }
 
