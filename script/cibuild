@@ -46,9 +46,9 @@ run_xcodebuild ()
 {
     if [ -n "$XCWORKSPACE" ]
     then
-        xcodebuild -workspace "$XCWORKSPACE" -configuration "$XCCONFIGURATION" "$@" OBJROOT="$PWD/build" SYMROOT="$PWD/build" $XCODEBUILD_SETTINGS 2>&1
+        xcodebuild -workspace "$XCWORKSPACE" -configuration "$XCCONFIGURATION" -derivedDataPath "build" "$@" $XCODEBUILD_SETTINGS 2>&1
     else
-        xcodebuild -configuration "$XCCONFIGURATION" "$@" OBJROOT="$PWD/build" SYMROOT="$PWD/build" $XCODEBUILD_SETTINGS 2>&1
+        xcodebuild -configuration "$XCCONFIGURATION" -derivedDataPath "build" "$@" $XCODEBUILD_SETTINGS 2>&1
     fi
 
     local status=$?
@@ -125,7 +125,7 @@ then
 fi
 
 echo "*** Cleaning all targets..."
-xcodebuild -alltargets -configuration "$XCCONFIGURATION" clean OBJROOT="$PWD/build" SYMROOT="$PWD/build" $XCODEBUILD_SETTINGS 2>&1 >/dev/null
+xcodebuild -alltargets -configuration "$XCCONFIGURATION" -derivedDataPath "build" clean $XCODEBUILD_SETTINGS 2>&1 >/dev/null
 
 if [ "$#" -ne "0" ]
 then
