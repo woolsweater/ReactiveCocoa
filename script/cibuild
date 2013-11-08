@@ -12,7 +12,7 @@ set -x
 # The build configuration to use.
 if [ -z "$XCCONFIGURATION" ]
 then
-    XCCONFIGURATION="Test"
+    XCCONFIGURATION="Release"
 fi
 
 # The workspace to build.
