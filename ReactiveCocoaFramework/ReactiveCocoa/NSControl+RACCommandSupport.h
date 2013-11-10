@@ -21,6 +21,7 @@
 
 /// A secondary signal whose logical AND with the control's
 /// `command.enabled` will determine the control's own `enabled`.
+///
 /// The secondary signal must consist of `NSNumber`s wrapping `BOOL`s.
 @property (nonatomic, strong) RACSignal * rac_secondaryEnabled;
 
